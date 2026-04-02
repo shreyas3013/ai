@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-deep: #020408;
+    --bg-panel: #080D14;
+    --accent-cyan: #00F5FF;
+    --accent-violet: #7C3AED;
+    --accent-lime: #A3FF47;
+    --text-primary: #E8F4F8;
+    --text-muted: #4A6580;
+    --glass-border: rgba(0, 245, 255, 0.15);
+    --glow-cyan: 0 0 40px rgba(0, 245, 255, 0.3);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    cursor: none;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 2px; }
+
+/* Custom cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.06s ease, background 0.15s ease, width 0.15s ease, height 0.15s ease;
+}
+.custom-cursor.hovered {
+  transform: translate(-50%, -50%) scale(1.5);
+  background: rgba(0, 245, 255, 0.3);
+}
+
+/* Load animations */
+@keyframes slideInLeft {
+  from { transform: translateX(-260px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideInRight {
+  from { transform: translateX(280px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fadeUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(0,245,255,0.25); }
+  50% { box-shadow: 0 0 30px rgba(0,245,255,0.565); }
+}
+@keyframes bounce1 {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+@keyframes bounce2 {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+@keyframes bounce3 {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+@keyframes slideInRight80 {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideInLeft80 {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation classes */
+.anim-sidebar { animation: slideInLeft 0.5s ease 0.2s both; }
+.anim-rightpanel { animation: slideInRight 0.5s ease 0.4s both; }
+.anim-chat { animation: fadeUp 0.5s ease 0.6s both; }
+.anim-canvas { animation: fadeIn 0.5s ease 0s both; }
+.anim-msg-user { animation: slideInRight80 0.08s ease both; }
+.anim-msg-ai { animation: slideInLeft80 0.3s ease both; }
+
+/* Glow pulse for AI avatar */
+.glow-pulse { animation: glowPulse 2s ease-in-out infinite; }
+
+/* Processing blink */
+.processing-dot { animation: pulse 1s ease-in-out infinite; }
+
+/* Typing indicator */
+.dot1 { animation: bounce1 1.2s ease-in-out infinite; }
+.dot2 { animation: bounce1 1.2s ease-in-out 0.2s infinite; }
+.dot3 { animation: bounce1 1.2s ease-in-out 0.4s infinite; }
+
+/* Token bar */
+@keyframes tokenFill {
+  from { width: 0; }
+  to { width: 68.42%; }
+}
+.token-bar-fill { animation: tokenFill 2s ease-out 1s both; }
+
+/* Radar animation */
+@keyframes radarExpand {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.radar-polygon { animation: radarExpand 1.5s ease-out 0.8s both; transform-origin: 100px 100px; }
+
+/* Stat count */
+.stat-count { animation: countUp 0.6s ease both; }
